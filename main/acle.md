@@ -423,6 +423,7 @@ Armv8.4-A [[ARMARMv84]](#ARMARMv84). Support is added for the Dot Product intrin
 * Removed Function Multi Versioning features ebf16, memtag3, and rpres.
 * Removed Function Multi Versioning feature dgh.
 * Simplified Function Multi Versioning version selection rules.
+* Add Function Multi Versioning feature names priority[ABCDE].
 * Fixed range of operand `o0` (too small) in AArch64 system register designations.
 * Fixed SVE2.1 quadword gather load/scatter store intrinsics.
 * Removed unnecessary Zd argument from `svcvtnb_mf8[_f32_x2]_fpm`.
@@ -2828,6 +2829,11 @@ The following table lists the architectures feature mapping for AArch64
    | 570           | `FEAT_SME_I16I64`        | sme-i16i64    | ```ID_AA64SMFR0_EL1.I16I64 == 0b1111```   |
    | 580           | `FEAT_SME2`              | sme2          | ```ID_AA64PFR1_EL1.SMEver >= 0b0001```    |
    | 650           | `FEAT_MOPS`              | mops          | ```ID_AA64ISAR2_EL1.MOPS >= 0b0001```     |
+   | 9995          | N/A                      | priorityE     | N/A                                       |
+   | 9996          | N/A                      | priorityD     | N/A                                       |
+   | 9997          | N/A                      | priorityC     | N/A                                       |
+   | 9998          | N/A                      | priorityB     | N/A                                       |
+   | 9999          | N/A                      | priorityA     | N/A                                       |
 
 ### Selection
 
@@ -2843,6 +2849,8 @@ identifying the highest priority feature that is specified in exactly one of
 the versions, and selecting that version.
 4. The selection algorithm must select the highest priority versions whose
 dependent features are all available.
+5. The feature names priorityA, ..., priorityE can be added to a version to
+change the selection order according to the above rules.
 
 ## Weak linkage
 
